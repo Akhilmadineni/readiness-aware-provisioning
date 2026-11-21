@@ -1,0 +1,12 @@
+item,value
+Tasks / columns,"16,000 / 22"
+Plans / workloads,"2,394 / 5"
+Regions / resource types / backoff policies,6 / 12 / 4
+Period (train / test),2025 / 2026 H1
+Rows train / test,"10,729 / 5,271"
+Rate limit range (req/s),5-20
+Missing % (3 columns),1.3-2.2
+Throttled tasks (errors>0) %,44.9
+Time-to-ready median [IQR] (s),"128 [40, 447]"
+Failure rate %,12.3
+Carbon intensity range (gCO2/kWh),8-623

@@ -1,0 +1,79 @@
+digraph A5P3 {
+  graph [rankdir=TB, fontname="Helvetica-Bold", fontsize=12, nodesep=0.25, ranksep=0.15, newrank=true,
+         pad=0.04, margin=0, splines=true];
+  node  [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=12, color="#666666", fillcolor="#ececec",
+         penwidth=0.9, margin="0.07,0.025", height=0.32, width=1.95];
+  edge  [color="#444444", arrowsize=0.6, penwidth=0.9, fontname="Helvetica", fontsize=11];
+
+  subgraph cluster_data {
+    label="A. Data layer"; labeljust=l; style="rounded,filled"; fillcolor="#f7f7f7"; color="#bbbbbb";
+    logs  [label="16,000 tasks\n6 regions, 12 types"];
+    split [label="Temporal split\n2025 | 2026 H1"];
+  }
+
+  subgraph cluster_twin {
+    label="B. Pre-processing + digital twin"; labeljust=l; style="rounded,filled"; fillcolor="#f7f7f7";
+    color="#bbbbbb";
+    clean [label="Winsorise +\nmedian imputation"];
+    dem   [label="Demand ratio D\nEq. (1)"];
+    thr   [label="Throttles λ, Eq. (2)\nPoisson MLE"];
+    ttr   [label="Ready time T, Eq. (3)\nfailure p, Eq. (4)"];
+    plans [label="Plan DAGs from\n2026 test rows"];
+    co2   [label="Carbon CI(r, h)\nEq. (5)"];
+  }
+
+  subgraph cluster_de {
+    label="C. Proposed readiness-aware DE"; labeljust=l; style="rounded,filled"; fillcolor="#e6f0fb";
+    color="#7aa6d6";
+    node [fillcolor="#cfe2f6", color="#1f6fb4"];
+    init  [label="Init NP=20, x∈[0,1]²⁹\n+ greedy warm start"];
+    dec   [label="Decode x, Eq. (7)\nπ, g, θ_r, gcap, τ"];
+    sim   [label="Twin simulation\nprogress ≥ g, D ≤ θ_r"];
+    obj   [label="Objective J(x)\nEq. (6)"];
+    mut   [label="Mutation, Eq. (8)\nF = 0.6"];
+    cx    [label="Crossover, Eq. (9)\nCR = 0.9"];
+    sel   [label="Evaluate J(u), keep\nif J(u) ≤ J(x), Eq. (10)"];
+    conv  [shape=diamond, style="filled", label="g < 50?", width=1.3, height=0.55, margin="0.02,0.02"];
+  }
+
+  subgraph cluster_eval {
+    label="D. Evaluation"; labeljust=l; style="rounded,filled"; fillcolor="#f7f7f7"; color="#bbbbbb";
+    base  [label="FIFO, parallel-max,\nRL-greedy"];
+    mc    [label="30 MC runs x 5 seeds\nWilcoxon, ablation"];
+  }
+
+  {rank=same; logs; split;}
+  {rank=same; clean; dem;}
+  {rank=same; ttr; thr;}
+  {rank=same; plans; co2;}
+  {rank=same; init; dec;}
+  {rank=same; obj; sim;}
+  {rank=same; mut; cx;}
+  {rank=same; conv; sel;}
+  {rank=same; base; mc;}
+  {rank=same; sel; conv;}
+
+  logs -> split;
+  split -> dem [style=invis];
+  logs -> clean [style=invis];
+  split -> clean [constraint=false];
+  clean -> dem;
+  dem -> thr;
+  thr -> ttr;
+  ttr -> plans [style=invis];
+  thr -> co2 [style=invis];
+  plans -> init;
+  co2 -> dec [label=" twin"];
+  ttr -> co2 [style=invis, constraint=false];
+  init -> dec;
+  dec -> sim;
+  sim -> obj;
+  obj -> mut;
+  mut -> cx;
+  cx -> sel;
+  conv -> sel [dir=back];
+  conv -> mut [label=" yes", constraint=false, color="#1f6fb4", fontcolor="#1f6fb4"];
+  conv -> mc [label=" no: best x*", fontcolor="#1f6fb4", color="#1f6fb4", penwidth=1.4];
+  sel -> base [style=invis];
+  mc -> base [dir=back];
+}

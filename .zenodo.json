@@ -1,0 +1,20 @@
+{
+  "title": "Readiness-Aware Scheduling for Multi-Region Infrastructure Provisioning Under API Rate Limits: code, synthetic data and results",
+  "version": "1.0.0",
+  "upload_type": "software",
+  "access_right": "open",
+  "license": "mit",
+  "language": "eng",
+  "creators": [
+    {
+      "name": "Madineni, Akhil Venkata Sai"
+    }
+  ],
+  "description": "<p>Experiment code, synthetic data and supplied numerical results for <em>Readiness-Aware Scheduling for Multi-Region Infrastructure Provisioning Under API Rate Limits</em>.</p><p>The archive contains scripts, input CSVs, result tables and figures. Data are entirely synthetic. The raw-data generator is not included; the experiments run from the included CSV files. See the repository README for installation, reproduction commands and limitations.</p><p>Source repository: <a href=\"https://github.com/Akhilmadineni/readiness-aware-provisioning\">https://github.com/Akhilmadineni/readiness-aware-provisioning</a>.</p>",
+  "keywords": [
+    "infrastructure provisioning",
+    "API rate limits",
+    "differential evolution",
+    "readiness scheduling"
+  ]
+}

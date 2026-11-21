@@ -1,0 +1,9 @@
+item,value
+Twin training / plan rows,2025 rows / 2026 H1 rows
+Test plans,10 (36-132 tasks)
+DE,"DE/rand/1/bin, NP=20, G=50, F=0.6, CR=0.9"
+Genome,"29 genes in [0,1]"
+Weights,"beta=0.5, gamma=0.5, delta=0.5, omega=0.15/h"
+Deferral bound,tau <= 6.0 h
+Greedy (tuned),"theta=2.5, gcap=10"
+Evaluation,30 Monte-Carlo runs x 5 seeds

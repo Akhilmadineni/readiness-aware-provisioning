@@ -1,0 +1,30 @@
+# Operating system and editor files
+.DS_Store
+.AppleDouble
+._*
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+
+# Python environments and caches
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Local credentials and environment files
+.env
+.env.*
+*.pem
+*.key
+
+# Regenerated PNG figures and console logs
+figures/
+*.log
+results/run_log.txt

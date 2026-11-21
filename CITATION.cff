@@ -1,0 +1,16 @@
+cff-version: "1.2.0"
+message: "If you use this software, please cite this software archive and the associated study."
+type: "software"
+title: "Readiness-Aware Scheduling for Multi-Region Infrastructure Provisioning Under API Rate Limits: code, synthetic data and results"
+version: "1.0.0"
+authors:
+  - family-names: "Madineni"
+    given-names: "Akhil Venkata Sai"
+license: "MIT"
+abstract: "Experiment code, synthetic input data, result tables and figures for the study \"Readiness-Aware Scheduling for Multi-Region Infrastructure Provisioning Under API Rate Limits\". The supplied CSV datasets are synthetic. The raw-data generator is not included. See README.md for reproduction instructions and study limitations."
+keywords:
+  - "infrastructure provisioning"
+  - "API rate limits"
+  - "differential evolution"
+  - "readiness scheduling"
+repository-code: "https://github.com/Akhilmadineni/readiness-aware-provisioning"
